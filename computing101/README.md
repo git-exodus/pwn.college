@@ -225,3 +225,20 @@ Here is your flag!
 pwn.college{
 ```
 </details>
+
+<details>
+<summary style="cursor:pointer">Double dereferencing</summary>
+  
+```bash
+--- nano
+.intel_syntax noprefix
+.global _start
+_start:
+mov rax, [rdi]
+mov rax, [rax]
+mov rdi, [rax]
+mov rax, 60
+syscall
+```
+</details>
+
