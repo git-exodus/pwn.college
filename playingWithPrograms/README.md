@@ -93,21 +93,8 @@ print(r.text)
 </details>
 
 <details>
-<summary style="cursor:pointer">HTTP (python)</summary>
-Finally, we'll learn the fourth tool in our HTTP toolbox: Python's requests library.
-This, along with the browser, will likely be the two most heavily used tools in your HTTP toolbox. 
-Requests lets you script complex web interactions, and this will be necessary to pull off tricky hacks later. 
-For now, things are simple: pull up Python, import requests, and GET the flag!
+<summary style="cursor:pointer">HTTP Host Header (python)</summary>
 
-- import requests > Docu: https://requests.readthedocs.io/en/latest/
-- start the server in an extra Terminal.
-- use "cat /challenge/server" to know which site to GET
-
-How to "one-liner":
-```
-python3 -c 'import requests; r = requests.get("http://challenge.localhost/task"); print(r.text)'
-```  
-or as script:
 ```
 import requests
 r = requests.get("http://challenge.localhost/task")
