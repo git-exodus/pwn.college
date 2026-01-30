@@ -13,9 +13,9 @@ mov rdi, [31337]
 mov rax, 60
 syscall
 ```
-then:  hacker@dojo:~$ as -o programm.o programm.s\
-then:  hacker@dojo:~$ ld -o programm programm.o\
-then:  hacker@dojo:~$ programm
+then:  hacker@dojo:$ as -o programm.o programm.s\
+then:  hacker@dojo:$ ld -o programm programm.o\
+then:  hacker@dojo:$ programm
 
 - mov -- mov DOES NOT move the memory content out, from one memory adress into the next one >> it COPYS it - both memory adresses have the same content!
 - as -- The "as" tool reads in program.s, assembles it into binary code, and outputs an object file called program.o.\
@@ -31,18 +31,35 @@ the value stored in rdi will be 42!
 </details>
 
 <details>
-<summary style="cursor:pointer">Loading from memory</summary>
+<summary style="cursor:pointer">More loading practice</summary>
   
--  To access the memory contents at memory address 31337, you can do [31337] for the memory adress:
+-  same with 123400 - programm name loadingfrommemorymore.s
 ```bash
 .intel_syntax noprefix
 .global _start
 _start:
-mov rdi, [31337]
+mov rdi, [123400]
 mov rax, 60
 syscall
+
+hacker@memory~more-loading-practice:~/assambly/memory$ as -o loadingfrommemorymore.o loadingfrommemorymore.s
+hacker@memory~more-loading-practice:~/assambly/memory$ ld -o loadingfrommemorymore loadingfrommemorymore.o
+hacker@memory~more-loading-practice:~/assambly/memory$ /challenge/check ~/assambly/memory/loadingfrommemorymore
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret value
+stored at memory address 123400 (value 71) to succeed!
+
+hacker@memory~more-loading-practice:/home/hacker/assambly/memory$ /tmp/your-program
+hacker@memory~more-loading-practice:/home/hacker/assambly/memory$ echo $?
+71
+hacker@memory~more-loading-practice:/home/hacker/assambly/memory$ 
+
+Neat! Your program passed the tests! Great job!
+
+Here is your flag!
+pwn.college{
 ```
-then:  hacker@dojo:~$ as -o programm.o programm.s\
-then:  hacker@dojo:~$ ld -o programm programm.o\
-then:  hacker@dojo:~$ programm
 </details>
