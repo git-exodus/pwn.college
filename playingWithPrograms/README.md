@@ -7,7 +7,7 @@ controlled environment for educational or security assessment purposes.
 ## Talking web
 
 <details>
-<summary style="cursor:pointer">HTTP // netcat</summary>
+<summary style="cursor:pointer">HTTP (netcat)</summary>
 
 - GET → I want to get something
 - / → mainpage
@@ -33,5 +33,84 @@ nc -v ADDRESS PORT
 GET / HTTP/1.0
 or
 GET / HTTP/1.1
+```
+</details>
+
+<details>
+<summary style="cursor:pointer">HTTP Paths (netcat)</summary>
+
+```
+cat /challenge/server >> find /task
+```  
+How to:
+```
+nc -v 127.0.0.1 80
+[Success]
+GET /task HTTP/1.1
+[Flag]
+```
+</details>
+
+<details>
+<summary style="cursor:pointer">HTTP (curl)</summary>
+Next, we'll practice making HTTP requests with one of the most common commandline tools for HTTP: curl.
+Unlike netcat, curl is made specifically for HTTP, and you don't have to write raw HTTP commands.
+Instead, you must learn to use the right program options to achieve what you want.
+Here, you must simply make a GET request to the right endpoint!
+
+How to:
+```
+curl http://challenge.localhost/trial
+```  
+
+```
+127.0.0.1 - - [30/Jan/2026 22:43:30] "GET /trail HTTP/1.1" 404 - <<< I AM DUMP typo.
+127.0.0.1 - - [30/Jan/2026 22:44:16] "GET / HTTP/1.1" 404 -
+127.0.0.1 - - [30/Jan/2026 22:45:54] "GET /trial HTTP/1.1" 200 - <<<< CORRECT
+```
+</details>
+
+<details>
+<summary style="cursor:pointer">HTTP (python)</summary>
+Finally, we'll learn the fourth tool in our HTTP toolbox: Python's requests library.
+This, along with the browser, will likely be the two most heavily used tools in your HTTP toolbox. 
+Requests lets you script complex web interactions, and this will be necessary to pull off tricky hacks later. 
+For now, things are simple: pull up Python, import requests, and GET the flag!
+
+- start the server in an extra Terminal.
+- use "cat /challenge/server" to know which site to GET
+
+How to "one-liner":
+```
+python3 -c 'import requests; r = requests.get("http://challenge.localhost/task"); print(r.text)'
+```  
+or as script:
+```
+import requests
+r = requests.get("http://challenge.localhost/task")
+print(r.text)
+```
+</details>
+
+<details>
+<summary style="cursor:pointer">HTTP (python)</summary>
+Finally, we'll learn the fourth tool in our HTTP toolbox: Python's requests library.
+This, along with the browser, will likely be the two most heavily used tools in your HTTP toolbox. 
+Requests lets you script complex web interactions, and this will be necessary to pull off tricky hacks later. 
+For now, things are simple: pull up Python, import requests, and GET the flag!
+
+- import requests > Docu: https://requests.readthedocs.io/en/latest/
+- start the server in an extra Terminal.
+- use "cat /challenge/server" to know which site to GET
+
+How to "one-liner":
+```
+python3 -c 'import requests; r = requests.get("http://challenge.localhost/task"); print(r.text)'
+```  
+or as script:
+```
+import requests
+r = requests.get("http://challenge.localhost/task")
+print(r.text)
 ```
 </details>
