@@ -176,3 +176,52 @@ syscall
 ```
 </details>
 
+<details>
+<summary style="cursor:pointer">Double dereferencing</summary>
+Let's put those last two together. In this challenge, we stored our SECRET_VALUE in memory at the address SECRET_LOCATION_1,
+then stored SECRET_LOCATION_1 in memory at the address SECRET_LOCATION_2. Then, we put SECRET_LOCATION_2 into rax! The result
+looks something like this, using 123400 for SECRET_LOCATION_1 and 133700 for SECRET_LOCATION_2 (not, in the real challenge,
+these values will be different and hidden from you!)
+
+Here, you will need to perform two memory reads: one dereferencing rax to read SECRET_LOCATION_1 from the location that rax is pointing to
+(which is SECRET_LOCATION_2), and the second one dereferencing whatever register now holds SECRET_LOCATION_1 to read SECRET_VALUE into rdi,
+so you can use it as the exit code!
+
+That sounds like a lot, but you've done basically all of this already. Go put it together!
+
+```bash
+--- nano
+.intel_syntax noprefix
+.global _start
+_start:
+mov rdi, [rax]
+mov rdi, [rdi]
+mov rax, 60
+syscall
+```
+
+```bash
+hacker@memory~double-dereference:~$ cd assambly/memory/
+hacker@memory~double-dereference:~/assambly/memory$ touch doublederefer.s
+hacker@memory~double-dereference:~/assambly/memory$ nano doublederefer.s 
+hacker@memory~double-dereference:~/assambly/memory$ as -o doublederefer.o doublederefer.s
+hacker@memory~double-dereference:~/assambly/memory$ ld -o doublederefer doublederefer.o
+hacker@memory~double-dereference:~/assambly/memory$ /challenge/check doublederefer
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret
+value pointed to by a chain of pointers starting at rax!
+
+hacker@memory~double-dereference:/home/hacker/assambly/memory$ /tmp/your-program
+hacker@memory~double-dereference:/home/hacker/assambly/memory$ echo $?
+62
+hacker@memory~double-dereference:/home/hacker/assambly/memory$ 
+
+Neat! Your program passed the tests! Great job!
+
+Here is your flag!
+pwn.college{
+```
+</details>
