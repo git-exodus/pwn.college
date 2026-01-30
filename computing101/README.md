@@ -42,14 +42,14 @@ mov rdi, [123400]
 mov rax, 60
 syscall
 
-hacker@memory~more-loading-practice:~/assambly/memory$ as -o loadingfrommemorymore.o loadingfrommemorymore.s
-hacker@memory~more-loading-practice:~/assambly/memory$ ld -o loadingfrommemorymore loadingfrommemorymore.o
-hacker@memory~more-loading-practice:~/assambly/memory$ /challenge/check ~/assambly/memory/loadingfrommemorymore
+hacker@memory~more$ as -o loadingfrommemorymore.o loadingfrommemorymore.s
+hacker@memory~more$ ld -o loadingfrommemorymore loadingfrommemorymore.o
+hacker@memory~more$ /challenge/check ~/assambly/memory/loadingfrommemorymore
 
 Checking the assembly code...
 ... YES! Great job!
 
-Let's check what your exit code is! It should be our secret value
+Lets check what your exit code is! It should be our secret value
 stored at memory address 123400 (value 71) to succeed!
 
 hacker@memory~more-loading-practice:/home/hacker/assambly/memory$ /tmp/your-program
