@@ -1,1 +1,1 @@
-# pwn.college
+# Pwn.college - Diary and Solutions
