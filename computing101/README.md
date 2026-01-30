@@ -122,3 +122,57 @@ mov rax, 60
 syscall
 ```
 </details>
+
+
+<details>
+<summary style="cursor:pointer">Dreferencing with offset</summary>
+So now you can dereference pointers in memory like a pro! But pointers don't always point directly at the data you need.\
+Sometimes, for example, a pointer might point to a collection of data (say, an entire book),\
+and you'll need to reference partway into this collection for the specific data you need.
+
+For example, if your pointer (say, rdi) points to a sequence of numbers in memory, as so:\
+If you want the second number of that sequence, you could do:
+```bash
+mov rax, [rdi+1]
+```
+Wow, super simple! In memory terms, we call these number slots bytes: each memory address represents a specific byte of memory. The above example is accessing memory 1 byte after the memory address pointed to by rdi. In memory terms, we call this 1 byte difference an offset, so in this example, there is an offset of 1 from the address pointed to by rdi.
+
+Let's practice this concept. As before, we will initialize rdi to point at the secret value, but not directly at it. This time, the secret value will have an offset of 8 bytes from where rdi points, something analogous to this:
+
+```bash
+--- nano
+.intel_syntax noprefix
+.global _start
+_start:
+mov rdi, [rdi+8]
+mov rax, 60
+syscall
+```
+</details>
+
+<details>
+<summary style="cursor:pointer">Stored Adresses</summary>
+Pointers can get even more interesting! Imagine that your friend lives in a different house on your street. Rather than remembering their address, you might write it down, and store the paper with their house address in your house. Then, to get data from your friend, you'd need to point the CPU at your house, have it go in there and find the friend's address, and use that address as a pointer to their house.
+
+Similarly, since memory addresses are really just values, they can be stored in memory, and retrieved later! Let's explore a scenario where we store the value 133700 at the address 123400, and store the value 42 at the address 133700. Consider the following instructions:
+```bash
+mov rdi, 123400    # after this, rdi becomes 123400
+mov rdi, [rdi]     # after this, rdi becomes the value stored at 123400 (which is 133700)
+mov rax, [rdi]     # here we dereference rdi, reading 42 into rax!
+```
+Wow! This storing of addresses is extremely common in programs. Addresses and data are stored, loaded, moved around, and, sometimes, mixed up with each other! When that happens, security issues can arise, and you'll romp through many such issues during your pwn.college journey.
+
+For now, let's practice dereferencing an address stored in memory. I'll store a secret value at a secret address, then store that secret address at the address 567800. You must read the address, dereference it, get the secret value, and then exit with it as the exit code. You got this!
+
+```bash
+--- nano
+.intel_syntax noprefix
+.global _start
+_start:
+mov rdi, [567800]
+mov rdi, [rdi]
+mov rax, 60
+syscall
+```
+</details>
+
