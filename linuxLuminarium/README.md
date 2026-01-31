@@ -54,9 +54,9 @@ hacker@dojo:$
 <details>
 <summary style="cursor:pointer">Redirection errors</summary>
 
-FD 0: Standard Input
-FD 1: Standard Output
-FD 2: Standard Error
+- FD 0: Standard Input
+- FD 1: Standard Output
+- FD 2: Standard Error
 
 Redirecting errors is pretty easy from this point. If you have a command that might produce data via standard error
 (such as /challenge/run), you can do:
@@ -98,7 +98,8 @@ hacker@piping~redirecting-errors:~$ cat myflag
 [FLAG] Here is your flag:
 [FLAG] pwn.college{omF2_qusnKiCPvzLfo0WjmGN2Jy.QX3YTN0wyNxkTN1EzW}
 ```
-</details
+
+</details>
 
 
 <details>
