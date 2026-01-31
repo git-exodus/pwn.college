@@ -49,7 +49,7 @@ hacker@dojo:$
 /challenge/run >> /home/hacker/the-flag
 ```
 
-</details
+</details>
 
 <details>
 <summary style="cursor:pointer">Redirection errors</summary>
@@ -99,6 +99,19 @@ hacker@piping~redirecting-errors:~$ cat myflag
 [FLAG] pwn.college{omF2_qusnKiCPvzLfo0WjmGN2Jy.QX3YTN0wyNxkTN1EzW}
 ```
 
+</details>
+
+<details>
+<summary style="cursor:pointer">Redirecting input</summary>
+  
+Just like you can redirect output from programs, you can redirect input to programs! This is done using <, as so
+
+```bash
+hacker@piping~redirecting-input:~$ echo COLLEGE > PWN
+hacker@piping~redirecting-input:~$ /challenge/run < PWN
+```
+
+PWN is the file directed into the programm run.
 </details>
 
 
