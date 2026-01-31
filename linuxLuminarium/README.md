@@ -134,32 +134,44 @@ In preparation for more complex levels, we want you to:
 
 
 <details>
-<summary style="cursor:pointer">Redirecting output</summary>
+<summary style="cursor:pointer">Grep-ping errors</summary>
   
-In this challenge, you must use this output redirection to write the word PWN (all uppercase) to the filename COLLEGE (all uppercase).
+You know how to redirect errors to a file, and you know how to pipe output to another program, such as grep. But what if you wanted to grep through errors directly?
+
+- The > operator redirects a given file descriptor to a file, and you've used 2> to redirect FD:2, which is standard error pipe.
+- The | operator redirects only standard output to another program, and there is no 2| form of the operator! 
+It can only redirect standard output (file descriptor 1).
+
+Luckily, where there's a shell, there's a way!
+
+The shell has a >& operator, which redirects a file descriptor to another file descriptor. This means that we can have a two-step process to grep through errors: first, we redirect standard error to standard output (2>& 1) and then pipe the now-combined stderr and stdout as normal (|)!
 
 ```bash
-echo PWN > COLLEGE
+/challenge/run 2>& 1 | grep pw
+```
+
+</details>
+
+<details>
+<summary style="cursor:pointer">Filtering grep -v</summary>
+  
+Filtering words with - grep -v "...."
+
+```bash
+/challenge/run | grep -v DECOY
 ```
 
 </details>
 <details>
-<summary style="cursor:pointer">Redirecting output</summary>
+<summary style="cursor:pointer">Filtering with sep</summary>
   
-In this challenge, you must use this output redirection to write the word PWN (all uppercase) to the filename COLLEGE (all uppercase).
+- s/ - substitute
+- oldword - the word to replace
+- newword - the replacement for oldword
+- /g - global (search for all occurrences of the pattern)
 
 ```bash
-echo PWN > COLLEGE
-```
-
-</details>
-<details>
-<summary style="cursor:pointer">Redirecting output</summary>
-  
-In this challenge, you must use this output redirection to write the word PWN (all uppercase) to the filename COLLEGE (all uppercase).
-
-```bash
-echo PWN > COLLEGE
+hacker@piping~filtering-with-sed:~$ /challenge/run | sed "s/FAKEFLAG//g"
 ```
 
 </details>
