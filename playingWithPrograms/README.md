@@ -95,9 +95,61 @@ print(r.text)
 <details>
 <summary style="cursor:pointer">HTTP Host Header (python)</summary>
 
+- url and headers = variables
+- url = string
+- headers = dictionary
+
+- use it in requests.get()
+  
 ```
 import requests
-r = requests.get("http://challenge.localhost/task")
+
+url = "http://challenge.localhost/request"
+headers = {
+        "Host":"ctflearn.com:80"
+          }
+
+r = requests.get(url, headers=headers) 
 print(r.text)
 ```
+
+</details>
+
+<details>
+<summary style="cursor:pointer">HTTP Host Header (curl)</summary>
+
+cat - /challenge/server
+check "man curl" for the command
+- curl -H "Host:" url
+- curl -H "Host:redarena.ai:80" http://challenge.localhost/verify
+  
+```
+hacker@talking-web~http-host-header-curl:~$ curl -H "Host:redarena.ai:80" http://challenge.localhost/verify
+
+        <html>
+          <head><title>Talking Web</title></head>
+        <body>
+          <h1>Great job!</h1>
+          <p>pwn.college{Ib204TL4M-rmWi24_yu2CSn7E-8.QXxcjMzwyNxkTN1EzW}</p>
+        </body>
+        </html>
+
+```
+
+</details>
+
+
+
+<details>
+<summary style="cursor:pointer">Listening web</summary>
+
+- Copy an already existing server (/challenge/server/)
+- Change the url and port at the bottom
+- Start the client - the client trys to connect
+- /challenge/client/
+  
+```
+app.run("http://localhost", 1337)
+```
+
 </details>
